@@ -81,7 +81,7 @@ public class ProductsController
     {
         try
         {
-            productDao.create(product);
+           var existingProduct = productDao.create(product);
         }
         catch(Exception ex)
         {
@@ -95,9 +95,9 @@ public class ProductsController
     {
         try
         {
-            var product = productDao.getById(id);
+            var Product = productDao.getById(id);
 
-            if(product == null)
+            if(Product == null)
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
             productDao.delete(id);

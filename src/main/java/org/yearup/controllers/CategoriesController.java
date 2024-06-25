@@ -18,16 +18,17 @@ import java.util.List;
     // http://localhost:8080/categories
 // add annotation to allow cross site origin requests
 public class CategoriesController {
-    private CategoryDao categoryDao;
+    private  CategoryDao categoryDao;
     private ProductDao productDao;
-    private CategoriesController categoryService;
+    private  CategoriesController categoryService;
 
 
     // constructor
     @Autowired
-    public CategoriesController(ProductDao productDao, CategoryDao categoryDao) {
+    public CategoriesController(ProductDao productDao, CategoryDao categoryDao, CategoriesController categoryService) {
         this.productDao = productDao;
         this.categoryDao = categoryDao;
+        this.categoryService = categoryService;
     }
 
 

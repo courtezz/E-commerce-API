@@ -3,6 +3,7 @@ package org.yearup.data.mysql;
 import org.springframework.stereotype.Component;
 import org.yearup.data.CategoryDao;
 import org.yearup.models.Category;
+import org.yearup.models.Product;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -48,6 +49,11 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     public void delete(int categoryId)
     {
         // delete category
+    }
+
+    @Override
+    public List<Product> getProductsById(int categoryId) {
+        return null;
     }
 
     private Category mapRow(ResultSet row) throws SQLException

@@ -20,7 +20,7 @@ import java.util.List;
 public class CategoriesController {
     private  CategoryDao categoryDao;
     private ProductDao productDao;
-    private  CategoriesController categoryService;
+
 
 
     // constructor
@@ -28,7 +28,7 @@ public class CategoriesController {
     public CategoriesController(ProductDao productDao, CategoryDao categoryDao, CategoriesController categoryService) {
         this.productDao = productDao;
         this.categoryDao = categoryDao;
-        this.categoryService = categoryService;
+
     }
 
 
@@ -42,7 +42,7 @@ public class CategoriesController {
     @GetMapping("{category_id}")
     public Category getById(@PathVariable int category_id) {
         // get the category by id
-        return categoryService.getById(category_id);
+        return categoryDao.getById(category_id);
     }
 
     // the url to return all products in category 1 would look like this
@@ -50,7 +50,7 @@ public class CategoriesController {
     @GetMapping("{categoryId}/products")
     public List<Product> getProductsById(@PathVariable int categoryId) {
         // get a list of product by categoryId
-        return categoryService.getProductsById(categoryId);
+        return categoryDao.getProductsById(categoryId);
     }
 
 
@@ -59,7 +59,7 @@ public class CategoriesController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Category addCategory(@RequestBody Category category) {
         // insert the category
-        return categoryService.addCategory(category);
+        return categoryDao.create(category);
     }
 
     // add annotation to call this method for a PUT (update) action - the url path must include the categoryId
@@ -68,7 +68,7 @@ public class CategoriesController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateCategory(@PathVariable int id, @RequestBody Category category) {
         // update the category by id
-        categoryService.updateCategory(id, category);
+        categoryDao.update(id, category);
 
     }
 
@@ -81,6 +81,6 @@ public class CategoriesController {
     public void deleteCategory(@PathVariable int id)
     {
         // delete the category by id
-        categoryService.deleteCategory(id);
+        categoryDao.delete(id);
     }
 }

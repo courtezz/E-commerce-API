@@ -46,4 +46,7 @@ public class Category
     {
         this.description = description;
     }
+
+    public void updateCategory(int id, Category category) {
+    }
 }

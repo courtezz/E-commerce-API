@@ -17,61 +17,60 @@ import java.util.List;
 @CrossOrigin
     // http://localhost:8080/categories
 // add annotation to allow cross site origin requests
-public class CategoriesController
-{
+public class CategoriesController {
     private CategoryDao categoryDao;
     private ProductDao productDao;
+    private CategoriesController categoryService;
 
 
     // constructor
     @Autowired
-   public CategoriesController(ProductDao productDao, CategoryDao categoryDao){
+    public CategoriesController(ProductDao productDao, CategoryDao categoryDao) {
         this.productDao = productDao;
         this.categoryDao = categoryDao;
     }
 
 
     @GetMapping("")
-    public List<Category> getAll()
-    {
+    public List<Category> getAll() {
         // find and return all categories
         return categoryDao.getAllCategories();
     }
 
 
     @GetMapping("{category_id}")
-    public Category getById(@PathVariable int category_id)
-    {
+    public Category getById(@PathVariable int category_id) {
         // get the category by id
-        return null;
+        return categoryService.getById(category_id);
     }
 
     // the url to return all products in category 1 would look like this
     // https://localhost:8080/categories/1/products
     @GetMapping("{categoryId}/products")
-    public List<Product> getProductsById(@PathVariable int categoryId)
-    {
+    public List<Product> getProductsById(@PathVariable int categoryId) {
         // get a list of product by categoryId
-        return null;
+        return categoryService.getProductsById(categoryId);
     }
 
 
     // add annotation to ensure that only an ADMIN can call this function
     @PostMapping("")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Category addCategory(@RequestBody Category category)
-    {
+    public Category addCategory(@RequestBody Category category) {
         // insert the category
-        return null;
+        return categoryService.addCategory(category);
     }
+
     // add annotation to call this method for a PUT (update) action - the url path must include the categoryId
     // add annotation to ensure that only an ADMIN can call this function
     @PutMapping("{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void updateCategory(@PathVariable int id, @RequestBody Category category)
-    {
+    public void updateCategory(@PathVariable int id, @RequestBody Category category) {
         // update the category by id
+        categoryService.updateCategory(id, category);
+
     }
+
 
 
     // add annotation to call this method for a DELETE action - the url path must include the categoryId
@@ -81,5 +80,6 @@ public class CategoriesController
     public void deleteCategory(@PathVariable int id)
     {
         // delete the category by id
+        categoryService.deleteCategory(id);
     }
 }

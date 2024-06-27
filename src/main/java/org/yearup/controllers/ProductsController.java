@@ -77,16 +77,14 @@ public class ProductsController
 
     @PutMapping("{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void updateProduct(@PathVariable int id, @RequestBody Product product)
-    {
-        try
-        {
-           var existingProduct = productDao.create(product);
-        }
-        catch(Exception ex)
-        {
+    public Product updateProduct(@PathVariable int id, @RequestBody Product product) {
+        try {
+            productDao.update(id, product);
+        } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
+
+        return product;
     }
 
     @DeleteMapping("{id}")

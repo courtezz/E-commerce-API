@@ -25,7 +25,7 @@ public class CategoriesController {
 
     // constructor
     @Autowired
-    public CategoriesController(ProductDao productDao, CategoryDao categoryDao, CategoriesController categoryService) {
+    public CategoriesController(ProductDao productDao, CategoryDao categoryDao) {
         this.productDao = productDao;
         this.categoryDao = categoryDao;
 

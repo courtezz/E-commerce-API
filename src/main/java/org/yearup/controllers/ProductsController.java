@@ -79,7 +79,7 @@ public class ProductsController
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Product updateProduct(@PathVariable int id, @RequestBody Product product) {
         try {
-            productDao.update(id, product);
+            productDao.update(id, product); // bug fix
         } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
